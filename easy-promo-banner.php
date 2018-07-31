@@ -85,7 +85,27 @@ class Easy_Promo_Banner {
     }
 
     public function field_callback( $args ) {
-        echo '<input name="our_first_field" id="our_first_field" type="text" value="' . get_option( 'our_first_field' ) . '" />';
+        $value = get_option( $args['uid'] ); //Get the current value, if there is one
+        if( ! $value ) { //If no value exists
+            $value = $args['default']; //Set to our default
+        }
+
+        //Check which type of field we want
+        switch( $args['type'] ){
+            case 'text': //If it is a text field
+                printf( '<input name="%1$s" id="%1$s" type="%2$s" placeholder="%3$s" value="%4$s" />', $args['uid'], $args['type'], $args['placeholder'], $value );
+                break;
+        }
+
+        //If there is help text
+        if ( $helper = $args['helper'] ){
+            printf( '<span class="helper"> %s</span>', $helper); //Show it
+        }
+
+        //If there is supplemental text
+        if ( $supplemental = $args['supplemental'] ){
+            printf( '<p class="description">%s</p>', $supplemental ); //Show it
+        }
     }
 }
 
