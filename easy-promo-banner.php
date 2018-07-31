@@ -45,22 +45,27 @@ class Easy_Promo_Banner {
     }
 
     public function setup_sections() {
-        add_settings_section( 'our_first_section', 'My First Section Title', array( $this, 'section_callback' ), 'promo_fields' );
-        add_settings_section( 'our_second_section', 'My Second Section Title', array( $this, 'section_callback' ), 'promo_fields');
-        add_settings_section( 'our_third_section', 'My Third Section Title', array( $this, 'section_callback' ), 'promo_fields');
+        add_settings_section( 'our_first_section', ' ', array( $this, 'section_callback' ), 'promo_fields' );
+        
+        // Uncomment below to add more sections. Be sure to update the callbacks if you add more than 3 sections
+    
+        // add_settings_section( 'our_second_section', 'My Second Section Title', array( $this, 'section_callback' ), 'promo_fields');
+        // add_settings_section( 'our_third_section', 'My Third Section Title', array( $this, 'section_callback' ), 'promo_fields');
+        
     }
 
     public function section_callback( $args ) {
         switch( $args['id'] ){
             case 'our_first_section':
-                echo 'This is the first description here!';
+                echo '<p style="max-width:450px;">Enter text for promo banner here. You can choose which pages to show this promo banner on by inputting the Page ID below. You can also add a URL to where the "Learn More" link points to when clicked.</p>';
                 break;
-            case 'our_second_section':
-                echo 'This is the second description here!';
-                break;
-            case 'our_third_section':
-                echo 'This is the third description here!';
-                break;
+
+            // case 'our_second_section':
+            //     echo 'This is the second description here!';
+            //     break;
+            // case 'our_third_section':
+            //     echo 'This is the third description here!';
+            //     break;
         }
     }
 
@@ -106,7 +111,7 @@ class Easy_Promo_Banner {
         );
         foreach( $fields as $field) {
             add_settings_field( $field['uid'], $field['label'], array( $this, 'field_callback' ), 'promo_fields', $field['section'], $field);
-            register_setting( 'promo_field', $field['uid'] );
+            register_setting( 'promo_fields', $field['uid'] );
         }
     }
 
