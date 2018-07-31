@@ -15,18 +15,22 @@ class Easy_Promo_Banner {
         //Hook into the admin menu
         add_action( 'admin_menu', array( $this, 'create_plugin_settings_page' ) );
     }
-    
+
     public function create_plugin_settings_page() {
         //Add the menu item and page
         $page_title = 'Easy Promo Banner';
         $menu_title = 'Easy Promo Banner';
-        $capability = 'manage_option';
+        $capability = 'manage_options';
         $slug       = 'easy_promo_banner';
         $callback   = array( $this, 'plugin_settings_page_content' );
         $icon       = 'dashicons-admin-plugins';
         $position   = 100;
 
         add_menu_page( $page_title, $menu_title, $capability, $slug, $callback, $icon, $position );
+    }
+
+    public function plugin_settings_page_content() {
+        echo 'Hello world!';
     }
 }
 
