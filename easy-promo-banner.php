@@ -14,6 +14,7 @@ class Easy_Promo_Banner {
     public function __construct() {
         //Hook into the admin menu
         add_action( 'admin_menu', array( $this, 'create_plugin_settings_page' ) );
+        add_action( 'admin_init', array( $this, 'setup_sections' ) );
     }
 
     public function create_plugin_settings_page() {
@@ -41,6 +42,26 @@ class Easy_Promo_Banner {
                 ?>
             </form>
         </div> <?php
+    }
+
+    public function setup_sections() {
+        add_settings_section( 'our_first_section', 'My First Section Title', array( $this, 'section_callback' ), 'promo_fields' );
+        add_settings_section( 'our_second_section', 'My Second Section Title', array( $this, 'section_callback' ), 'promo_fields');
+        add_settings_section( 'our_third_section', 'My Third Section Title', array( $this, 'section_callback' ), 'promo_fields');
+    }
+
+    public function section_callback( $args ) {
+        switch( $args['id'] ){
+            case 'our_first_section':
+                echo 'This is the first description here!';
+                break;
+            case 'our_second_section':
+                echo 'This is the second description here!';
+                break;
+            case 'our_third_section':
+                echo 'This is the third description here!';
+                break;
+        }
     }
 }
 
