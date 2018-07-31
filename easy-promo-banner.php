@@ -65,8 +65,23 @@ class Easy_Promo_Banner {
     }
 
     public function setup_fields() {
-        add_settings_field( 'our_first_field', 'Field Name', array( $this, 'field_callback' ), 'promo_fields', 'our_first_section' );
-        register_setting( 'promo_fields', 'our_first_field' );
+        $fields = array (
+            array(
+                'uid' => 'our_first_field',
+                'label' => 'Promo Banner Title',
+                'section' => 'our_first_section',
+                'type'    => 'text',
+                'options' => 'false',
+                'placeholder' => 'Title goes here',
+                'helper'      => 'Does this text help?',
+                'supplemental' => 'This text will appear in the banner.',
+                'default'      => ' '
+            )
+        );
+        foreach( $fields as $field) {
+            add_settings_field( $field['uid'], $field['label'], array( $this, 'field_callback' ), 'promo_fields', $field['section'], $field);
+            register_setting( 'promo_field', $field['uid'] );
+        }
     }
 
     public function field_callback( $args ) {
