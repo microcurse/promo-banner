@@ -70,7 +70,7 @@ class Easy_Promo_Banner {
     }
 
     public function field_callback( $args ) {
-        echo '<input name="our_first_field" id="our_first_field" type="type" value="' . get_option( 'our_first_field' ) . '" />';
+        echo '<input name="our_first_field" id="our_first_field" type="text" value="' . get_option( 'our_first_field' ) . '" />';
     }
 }
 
