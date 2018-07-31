@@ -10,14 +10,25 @@
  */
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
-add_action('admin_menu', 'promo_banner_setup_menu');
+class Easy_Promo_Banner {
+    public function __construct() {
+        //Hook into the admin menu
+        add_action( 'admin_menu', array( $this, 'create_plugin_settings_page' ) );
+    }
+    
+    public function create_plugin_settings_page() {
+        //Add the menu item and page
+        $page_title = 'Easy Promo Banner';
+        $menu_title = 'Easy Promo Banner';
+        $capability = 'manage_option';
+        $slug       = 'easy_promo_banner';
+        $callback   = array( $this, 'plugin_settings_page_content' );
+        $icon       = 'dashicons-admin-plugins';
+        $position   = 100;
 
-function promo_banner_setup_menu() {
-    add_menu_page( 'Easy Promo Banner', 'Easy Promo Banner','manage_options', 'easy-promo-banner', 'easy_promo_init');
+        add_menu_page( $page_title, $menu_title, $capability, $slug, $callback, $icon, $position );
+    }
 }
 
-function easy_promo_init() {
-    echo "<h1>Hello World!</h1>";
-}
-
+new Easy_Promo_Banner();
 ?>
