@@ -10,4 +10,14 @@
  */
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
+add_action('admin_menu', 'promo_banner_setup_menu');
+
+function promo_banner_setup_menu() {
+    add_menu_page( 'Easy Promo Banner', 'Easy Promo Banner','manage_options', 'easy-promo-banner', 'easy_promo_init');
+}
+
+function easy_promo_init() {
+    echo "<h1>Hello World!</h1>";
+}
+
 ?>
