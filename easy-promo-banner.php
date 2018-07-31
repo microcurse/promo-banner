@@ -15,6 +15,7 @@ class Easy_Promo_Banner {
         //Hook into the admin menu
         add_action( 'admin_menu', array( $this, 'create_plugin_settings_page' ) );
         add_action( 'admin_init', array( $this, 'setup_sections' ) );
+        add_action( 'admin_init', array( $this, 'setup_fields' ) );
     }
 
     public function create_plugin_settings_page() {
@@ -62,6 +63,14 @@ class Easy_Promo_Banner {
                 echo 'This is the third description here!';
                 break;
         }
+    }
+
+    public function setup_fields() {
+        add_settings_field( 'our_first_field', 'Field Name', array( $this, 'field_callback' ), 'promo_fields', 'our_first_section' );
+    }
+
+    public function field_callback( $args ) {
+        echo '<input name="our_first_field" id="our_first_field" type="type" value="' . get_option( 'our_first_field' ) . '" />';
     }
 }
 
