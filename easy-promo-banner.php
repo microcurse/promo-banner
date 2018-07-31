@@ -37,8 +37,7 @@ class Easy_Promo_Banner {
             <form method="post" action="options.php">
                 <?php 
                     settings_fields( 'promo_fields' );
-                    do_settings_sections( 'promo_fields' 
-                );
+                    do_settings_sections( 'promo_fields' );
                     submit_button();    
                 ?>
             </form>
@@ -67,6 +66,7 @@ class Easy_Promo_Banner {
 
     public function setup_fields() {
         add_settings_field( 'our_first_field', 'Field Name', array( $this, 'field_callback' ), 'promo_fields', 'our_first_section' );
+        register_setting( 'promo_fields', 'our_first_field' );
     }
 
     public function field_callback( $args ) {
