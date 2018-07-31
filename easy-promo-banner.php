@@ -21,7 +21,7 @@ class Easy_Promo_Banner {
         $page_title = 'Easy Promo Banner';
         $menu_title = 'Easy Promo Banner';
         $capability = 'manage_options';
-        $slug       = 'easy_promo_banner';
+        $slug       = 'promo_fields';
         $callback   = array( $this, 'plugin_settings_page_content' );
         $icon       = 'dashicons-admin-plugins';
         $position   = 100;
@@ -29,8 +29,18 @@ class Easy_Promo_Banner {
         add_menu_page( $page_title, $menu_title, $capability, $slug, $callback, $icon, $position );
     }
 
-    public function plugin_settings_page_content() {
-        echo 'Hello world!';
+    public function plugin_settings_page_content() { ?>
+        <div class="wrap">
+            <h2>Easy Promo Banner Settings</h2>
+            <form method="post" action="options.php">
+                <?php 
+                    settings_fields( 'promo_fields' );
+                    do_settings_sections( 'promo_fields' 
+                );
+                    submit_button();    
+                ?>
+            </form>
+        </div> <?php
     }
 }
 
