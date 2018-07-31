@@ -67,15 +67,41 @@ class Easy_Promo_Banner {
     public function setup_fields() {
         $fields = array (
             array(
-                'uid' => 'our_first_field',
-                'label' => 'Promo Banner Title',
-                'section' => 'our_first_section',
-                'type'    => 'text',
-                'options' => 'false',
-                'placeholder' => 'Title goes here',
-                'helper'      => 'Does this text help?',
+                'uid'          => 'our_first_field',
+                'label'        => 'Promo Banner Title',
+                'section'      => 'our_first_section',
+                'type'         => 'text',
+                'options'      => 'false',
+                'placeholder'  => 'Title goes here',
+                'helper'       => 'Does this text help?',
                 'supplemental' => 'This text will appear in the banner.',
                 'default'      => ' '
+            ),
+            array(
+                'uid'          => 'our_second_field',
+                'label'        => 'Promo text',
+                'section'      => 'our_first_section',
+                'type'         => 'textarea',
+                'options'      => 'false',
+                'placeholder'  => 'Text for banner goes here',
+                'helper'       => 'Useless side text',
+                'supplemental' => 'This text will appear to the right of the banner title',
+                'default'      => ' '
+            ),
+            array(
+                'uid'          => 'our_third_field',
+                'label'        => 'Awesome Select',
+                'section'      => 'our_first_section',
+                'type'         => 'select',
+                'options'      => array(
+                    'yes'   => 'Chee hee!',
+                    'no'    => 'Hell naw!',
+                    'maybe' => 'Perhaps..'
+                ),
+                'placeholder'  => 'Text goes here',
+                'helper'       => 'Does this text help?',
+                'supplemental' => 'This text will appear in the banner.',
+                'default'      => 'maybe'
             )
         );
         foreach( $fields as $field) {
@@ -94,6 +120,18 @@ class Easy_Promo_Banner {
         switch( $args['type'] ){
             case 'text': //If it is a text field
                 printf( '<input name="%1$s" id="%1$s" type="%2$s" placeholder="%3$s" value="%4$s" />', $args['uid'], $args['type'], $args['placeholder'], $value );
+                break;
+            case 'textarea': //If it is a textarea
+                printf( '<textarea name="%1$s" id="%1$s" placeholder="%2$s" cols="50" rows="5">%3$s</textarea>', $args['uid'], $args['placeholder'], $value );
+                break;
+            case 'select': //If it is a select dropdown
+                if( ! empty ( $args['options'] ) && is_array( $args['options'] ) ){
+                    $options_markup = '';
+                    foreach( $args['options'] as $key => $label){
+                        $options_markup .= sprintf( '<option value="%s" %s>%s</option>', $key, selected( $value, $key, false ), $label );
+                    }
+                    printf( '<select name="%1$s" id="%1$s">%2$s</select>', $args['uid'], $options_markup );
+                }
                 break;
         }
 
